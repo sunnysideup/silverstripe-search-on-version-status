@@ -72,8 +72,6 @@ class IsPublishedFilter extends SearchFilter
             }
         }
 
-
-
         return $query->where("\"{$baseTable}\".\"ID\" IN (" . implode(',', $array) . ')');
     }
 
