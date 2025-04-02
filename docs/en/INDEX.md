@@ -3,7 +3,7 @@ You can use it like this:
 ```php
     private static $searchable_fields = [
         'ID' => [
-            'field' => PublishedStatus::class,
+            'field' => PublishedStateDropdown::class,
             'filter' => IsPublishedFilter::class,
             'title' => 'Status',
         ],
