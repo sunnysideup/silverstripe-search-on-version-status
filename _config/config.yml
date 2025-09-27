@@ -1,0 +1,40 @@
+---
+Name: corefieldtypes_ispublished
+After:
+  - '#corefieldtypes'
+---
+SilverStripe\Core\Injector\Injector:
+  IsPublished:
+    class: Sunnnysideup\SearchOnVersionStatus\Search\IsPublishedFilter
+---
+Name: coresearchfilters_ispublished
+After:
+  - '#coresearchfilters'
+---
+SilverStripe\Core\Injector\Injector:
+  DataListFilter.IsPublished:
+    class: Sunnnysideup\SearchOnVersionStatus\Search\IsPublishedFilter
+---
+Name: coresearchaliases_ispublished
+After:
+  - '#coresearchaliases'
+---
+SilverStripe\Core\Injector\Injector:
+  IsPublishedFilter: '%$DataListFilter.IsPublished'
+# ---
+# Name: corefieldtypes
+# ---
+# SilverStripe\Core\Injector\Injector:
+#   Boolean:
+#     class: SilverStripe\ORM\FieldType\DBBoolean
+# ---
+# Name: coresearchfilters
+# ---
+# SilverStripe\Core\Injector\Injector:
+#   DataListFilter.EndsWith:
+#     class: SilverStripe\ORM\Filters\EndsWithFilter
+# ---
+# Name: coresearchaliases
+# ---
+# SilverStripe\Core\Injector\Injector:
+#   EndsWithFilter: '%$DataListFilter.EndsWith'
