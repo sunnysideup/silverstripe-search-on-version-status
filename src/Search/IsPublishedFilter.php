@@ -65,7 +65,7 @@ class IsPublishedFilter extends SearchFilter
                 return $query;
         }
 
-        if ($sql) {
+        if ($sql !== '' && $sql !== '0') {
             $rows = DB::query($sql);
             foreach ($rows as $row) {
                 $array[$row['ID']] = $row['ID'];
