@@ -16,9 +16,9 @@ class IsPublishedFilter extends SearchFilter
         $array = [0 => 0];
         $schema = DataObject::getSchema();
         $className = $query->dataClass();
-        $baseTable = $schema->baseDataTable($className);        
+        $baseTable = $schema->baseDataTable($className);
         switch ($this->getValue()) {
-            
+
             case 'MODIFIED':
                 $className = $query->dataClass();
                 $objects = $className::get();
@@ -29,37 +29,37 @@ class IsPublishedFilter extends SearchFilter
                 }
 
                 break;
-            
+
             case Versioned::LIVE:
-                $sql = 'SELECT "ID" FROM "'.$baseTable.'_Live"';
+                $sql = 'SELECT "ID" FROM "' . $baseTable . '_Live"';
 
                 break;
-            
+
             case Versioned::DRAFT:
                 $sql = '
-                    SELECT "'.$baseTable.'"."ID"
-                    FROM "'.$baseTable.'"
-                    LEFT JOIN "'.$baseTable.'_Live" ON "'.$baseTable.'_Live"."ID" = "'.$baseTable.'"."ID"
-                    WHERE "'.$baseTable.'_Live"."ID" IS NULL';
+                    SELECT "' . $baseTable . '"."ID"
+                    FROM "' . $baseTable . '"
+                    LEFT JOIN "' . $baseTable . '_Live" ON "' . $baseTable . '_Live"."ID" = "' . $baseTable . '"."ID"
+                    WHERE "' . $baseTable . '_Live"."ID" IS NULL';
 
                 break;
-            
+
             case 'DRAFT_ERROR':
                 $sql = '
-                    SELECT "'.$baseTable.'_Live"."ID"
-                    FROM "'.$baseTable.'_Live"
-                    LEFT JOIN '.$baseTable.' ON '.$baseTable.'_Live.ID = '.$baseTable.'.ID
-                    WHERE '.$baseTable.'.ID IS NULL';
+                    SELECT "' . $baseTable . '_Live"."ID"
+                    FROM "' . $baseTable . '_Live"
+                    LEFT JOIN ' . $baseTable . ' ON ' . $baseTable . '_Live.ID = ' . $baseTable . '.ID
+                    WHERE ' . $baseTable . '.ID IS NULL';
 
                 break;
 
             case 'PUBLISHED_CLEAN':
                 $objects = $className::get();
                 foreach ($objects as $obj) {
-                    if (!$obj->isModifiedOnDraft() && $obj->isPublished()) {
+                    if (! $obj->isModifiedOnDraft() && $obj->isPublished()) {
                         $array[$obj->ID] = $obj->ID;
                     }
-                }                
+                }
                 break;
             default:
                 return $query;
