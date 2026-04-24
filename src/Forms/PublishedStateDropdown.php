@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sunnnysideup\SearchOnVersionStatus\Forms;
 
+use Override;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Versioned\Versioned;
 
 class PublishedStateDropdown extends DropdownField
 {
+    #[Override]
     public function getSource()
     {
         $array = parent::getSource();

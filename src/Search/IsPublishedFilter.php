@@ -60,6 +60,7 @@ class IsPublishedFilter extends SearchFilter
                         $array[$obj->ID] = $obj->ID;
                     }
                 }
+
                 break;
             default:
                 return $query;
@@ -72,7 +73,7 @@ class IsPublishedFilter extends SearchFilter
             }
         }
 
-        return $query->where("\"{$baseTable}\".\"ID\" IN (" . implode(',', $array) . ')');
+        return $query->where(sprintf('"%s"."ID" IN (', $baseTable) . implode(',', $array) . ')');
     }
 
     protected function excludeOne(DataQuery $query)
